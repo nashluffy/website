@@ -26,5 +26,6 @@ WORKDIR /app
 COPY --from=builder /app/vendor .
 COPY --from=builder /app/static .
 COPY --from=builder /app/website .
+COPY --from=builder /app/templates .
 
 CMD ["/app/website"]

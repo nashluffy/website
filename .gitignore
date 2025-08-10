@@ -31,3 +31,6 @@ go.work.sum
 # Editor/IDE
 .idea/
 # .vscode/
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json
