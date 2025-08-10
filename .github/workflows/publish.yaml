@@ -48,9 +48,11 @@ jobs:
           echo "image_ref=$IMAGE_REF" >> $GITHUB_OUTPUT
 
   terraform:
+    needs: build-and-push
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: 'write'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
