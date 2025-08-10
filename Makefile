@@ -12,6 +12,7 @@ deps: clean
 	unzip -q $(PICO_ZIP_FILE) -d $(VENDOR_DIR)
 	mv $(VENDOR_DIR)/pico-main $(PICO_EXTRACT_DIR)
 	rm $(PICO_ZIP_FILE)
+	mkdir -p static/css
 	ln -rs vendor/pico/css/* static/css/
 
 .PHONY: fmt
