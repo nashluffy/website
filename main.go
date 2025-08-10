@@ -2,7 +2,6 @@ package main
 
 import (
 	"html/template"
-	"io"
 	"log"
 	"net/http"
 )
@@ -18,16 +17,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-
 }
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.Handle("/stylesheets/", http.StripPrefix("/stylesheets/", http.FileServer(http.Dir("vendor/pico/css"))))
+	http.HandleFunc("/cv", func(writer http.ResponseWriter, request *http.Request) {
+		http.ServeFile(writer, request, "static/files/resume.pdf")
+	})
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("static/css"))))
+	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("static/images"))))
 	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func templateBase(content string, w io.Writer) error {
-	t, _ := template.ParseFiles("templates/base.html")
-	return t.Execute(w, content)
 }

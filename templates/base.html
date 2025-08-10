@@ -1,20 +1,23 @@
 <!doctype html>
-<html>
-  <link rel="stylesheet" href="stylesheets/pico.min.css" />
+<html lang="en-GB">
+  <head>
+    <link rel="stylesheet" href="css/pico.sand.min.css" />
+    <link rel="stylesheet" href="css/overrides.css" />
+    <title>Nash Luffman's Website</title>
+  </head>
   <body>
     <div class="container">
       <nav>
         <ul>
-          <li><strong>Acme Corp</strong></li>
+          <li><a href="/"> <strong>Nash Luffman</strong> </a> </li>
         </ul>
         <ul>
-          <li><a href="#" class="contrast">About</a></li>
-          <li><a href="#" class="contrast">Services</a></li>
-          <li><a href="#" class="contrast">Products</a></li>
+          <li><a href="/" class="contrast">About</a></li>
+          <li><a href="#" class="contrast">Blog</a></li>
         </ul>
       </nav>
     </div>
   </body>
 
-  {{ block "Content" . }}{{ end }}
+  <main class="container">{{ block "content" . }}{{ end }}</main>
 </html>
