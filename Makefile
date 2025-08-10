@@ -32,7 +32,7 @@ build:
 # Clean the vendor directory
 .PHONY: clean
 clean:
-	find static/css -type l -delete
+	find static/css -type l -delete || true
 	rm -rf $(VENDOR_DIR)
 	@echo "Cleaned vendor directory"
 
