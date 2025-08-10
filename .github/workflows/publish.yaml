@@ -74,7 +74,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform -chdir=deploy init -lock-timeout=5m
+        run: terraform -chdir=deploy/terraform init -lock-timeout=5m
 
       - name: Terraform Apply
-        run: terraform -chdir=deploy apply -lock-timeout=5m -auto-approve -var="image_ref=${{ needs.build-and-push.outputs.image_ref }}" -var="project_id=personal-website-464720"
+        run: terraform -chdir=deploy/terraform apply -lock-timeout=5m -auto-approve -var="image_ref=${{ needs.build-and-push.outputs.image_ref }}" -var="project_id=personal-website-464720"
