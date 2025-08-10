@@ -12,12 +12,11 @@ deps: clean
 	unzip -q $(PICO_ZIP_FILE) -d $(VENDOR_DIR)
 	mv $(VENDOR_DIR)/pico-main $(PICO_EXTRACT_DIR)
 	rm $(PICO_ZIP_FILE)
-	npm install -g prettier
 	ln -rs vendor/pico/css/* static/css/
-
 
 .PHONY: fmt
 fmt:
+	npm install -g prettier
 	go fmt ./...
 	npx prettier templates --write
 
@@ -25,6 +24,10 @@ fmt:
 .PHONY: run
 run:
 	go run main.go
+
+.PHONY: build
+build:
+	go build -o website .
 
 # Clean the vendor directory
 .PHONY: clean

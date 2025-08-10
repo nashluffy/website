@@ -26,5 +26,6 @@ func main() {
 	})
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("static/css"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("static/images"))))
+	log.Println("Starting server on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
