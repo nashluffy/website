@@ -15,13 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Needed for GHCR
+      packages: write
     steps:
-      # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Log in to GitHub Container Registry (GHCR)
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -29,7 +27,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and push the Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
