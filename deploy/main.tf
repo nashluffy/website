@@ -2,6 +2,8 @@ locals {
   region = "us-central1"
   zone = "us-central1-a"
   vm_name = "website"
+  domain = "nashluffman.com"
+  app_port = 8080
 }
 
 resource "google_compute_address" "static_ip" {
@@ -73,9 +75,9 @@ resource "google_compute_instance" "vm" {
         image: ${var.app_image}
         restart: unless-stopped
         expose:
-          - "${var.internal_port}"
+          - "${local.app_port}"
         environment:
-          - PORT=${var.internal_port}
+          - PORT=${local.app_port}
 
       caddy:
         image: caddy:latest
@@ -96,8 +98,8 @@ resource "google_compute_instance" "vm" {
     EOF
 
     cat > ${APP_DIR}/Caddyfile <<EOF
-    ${var.domain} {
-      reverse_proxy app:${var.internal_port}
+    ${local.domain} {
+      reverse_proxy app:${local.app_port}
     }
     EOF
 
