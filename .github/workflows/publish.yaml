@@ -20,6 +20,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    outputs:
+      image_ref: ${{ steps.set-image-ref.outputs.image-ref }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,7 +46,7 @@ jobs:
       - name: Set full image reference with digest
         id: set-image-ref
         run: |
-          DIGEST=${{ steps.build-image.outputs.digest }}
+          DIGEST=${{ steps.build-and-push.outputs.digest }}
 
           IMAGE_REF="${{ env.IMAGE_NAME }}@${DIGEST}"
 
