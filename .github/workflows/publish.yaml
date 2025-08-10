@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }} # org/repo format
   DOCKERFILE: ./Dockerfile
@@ -28,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        id: build-image
+        id: build-and-push
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.CONTEXT }}
